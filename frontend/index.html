@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mohammed Yussif — CyberSec Portfolio</title>
+
+  <!-- ✅ FIX F-09: Content Security Policy — tells browser what's allowed to run -->
+  <!-- Blocks any scripts/styles not from your own domain or trusted sources -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self';
+             style-src 'self' https://fonts.googleapis.com;
+             font-src 'self' https://fonts.gstatic.com;
+             script-src 'self';
+             img-src 'self' data:;
+             connect-src 'self' http://localhost:3000;">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="nav-logo">[ mohammed@yussif ~$ ]</div>
+    <ul>
+      <li><a href="#about">./about</a></li>
+      <li><a href="#skills">./skills</a></li>
+      <li><a href="#contact">./contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <div class="hero-tag">Ethical Hacker &amp; Pentester</div>
+      <h1>Breaking Systems<br>to <span class="accent">Secure Them.</span></h1>
+      <p class="hero-sub">
+        Cybersecurity professional specializing in penetration testing,
+        vulnerability research, and red team operations. I find the cracks
+        before the bad actors do.
+      </p>
+      <div class="btn-group">
+        <a href="#contact" class="btn btn-primary">./hire_me</a>
+        <a href="#skills" class="btn btn-outline">./view_skills</a>
+      </div>
+      <div class="terminal-block">
+        <div class="line"><span class="prompt">$</span> whoami</div>
+        <div class="line out">mohammed_yussif | ethical_hacker | pentester</div>
+        <div class="line"><span class="prompt">$</span> cat mission.txt</div>
+        <div class="line out">"Offense informs defense. I speak both languages."</div>
+        <div class="line"><span class="prompt">$</span> <span class="cursor"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">// 01. about_me</div>
+    <h2>Who I Am <span class="line"></span></h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a cybersecurity specialist with a passion for offensive security and ethical hacking.</p>
+        <p>From web application testing to network intrusions and social engineering assessments, I bring a methodical, adversarial mindset to every engagement.</p>
+        <p>I believe in responsible disclosure, continuous learning, and giving back to the security community.</p>
+        <div class="stat-row">
+          <div class="stat"><span class="stat-num">10+</span><span class="stat-label">Engagements</span></div>
+          <div class="stat"><span class="stat-num">8+</span><span class="stat-label">Certifications</span></div>
+          <div class="stat"><span class="stat-num">2+</span><span class="stat-label">Years Exp.</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="section-label" style="margin-bottom:1rem">// certifications</div>
+        <div class="cert-item"><div class="cert-dot"></div>TryHackMe – Advent of Cyber 2025</div>
+        <div class="cert-item"><div class="cert-dot"></div>Commonwealth Bank – Intro to Cybersecurity Job Simulation · Forage</div>
+        <div class="cert-item"><div class="cert-dot"></div>Datacom – Cyber Security Operations Job Simulation · Forage</div>
+        <div class="cert-item"><div class="cert-dot"></div>Deloitte Australia – Cyber Job Simulation · Forage</div>
+        <div class="cert-item"><div class="cert-dot"></div>Mastercard – Cybersecurity Job Simulation · Forage</div>
+        <div class="cert-item"><div class="cert-dot"></div>EC-Council – In-house Hacking & Pentesting Lab · ID: 447749</div>
+        <div class="cert-item"><div class="cert-dot"></div>Cybersecurity – Tumi Tech Hub</div>
+        <div class="cert-item"><div class="cert-dot"></div>Microsoft Suite – IPMC Ghana</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-label">// 02. skills</div>
+    <h2>Arsenal <span class="line"></span></h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-icon">🔴</div>
+        <h3>// Technical Skills</h3>
+        <div class="skill-tags">
+          <span class="tag red">Penetration Testing</span>
+          <span class="tag red">Web App Security</span>
+          <span class="tag red">Network Exploitation</span>
+          <span class="tag red">Privilege Escalation</span>
+          <span class="tag red">Reverse Engineering</span>
+          <span class="tag red">Malware Analysis</span>
+          <span class="tag red">OSINT</span>
+          <span class="tag red">Social Engineering</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">🛠</div>
+        <h3>// Tools &amp; Software</h3>
+        <div class="skill-tags">
+          <span class="tag">Metasploit</span>
+          <span class="tag">Burp Suite</span>
+          <span class="tag">Nmap</span>
+          <span class="tag">Wireshark</span>
+          <span class="tag">Kali Linux</span>
+          <span class="tag">Cobalt Strike</span>
+          <span class="tag">Nessus</span>
+          <span class="tag">SQLMap</span>
+          <span class="tag">Hydra</span>
+          <span class="tag">John the Ripper</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">🧠</div>
+        <h3>// Soft Skills</h3>
+        <div class="skill-tags">
+          <span class="tag blue">Critical Thinking</span>
+          <span class="tag blue">Report Writing</span>
+          <span class="tag blue">Communication</span>
+          <span class="tag blue">Problem Solving</span>
+          <span class="tag blue">Team Collaboration</span>
+          <span class="tag blue">Adaptability</span>
+        </div>
+      </div>
+    </div>
+    <div class="skill-bars">
+      <div class="section-label" style="margin-bottom:1rem">// proficiency</div>
+      <div class="skill-bar-item">
+        <label><span>Web App Pentesting</span><span class="bar-pct">95%</span></label>
+        <div class="bar-track"><div class="bar-fill" data-width="95"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <label><span>Network Security</span><span class="bar-pct">88%</span></label>
+        <div class="bar-track"><div class="bar-fill" data-width="88"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <label><span>Exploit Development</span><span class="bar-pct">80%</span></label>
+        <div class="bar-track"><div class="bar-fill" data-width="80"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <label><span>Malware Analysis</span><span class="bar-pct">75%</span></label>
+        <div class="bar-track"><div class="bar-fill" data-width="75"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <label><span>Red Team Ops</span><span class="bar-pct">85%</span></label>
+        <div class="bar-track"><div class="bar-fill" data-width="85"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label">// 03. contact</div>
+    <h2>Get In Touch <span class="line"></span></h2>
+    <div class="contact-wrapper">
+      <div class="contact-info">
+        <p>Available for penetration testing engagements, bug bounty consulting, and red team collaborations.</p>
+        <a href="mailto:yussif4112@gmail.com" class="contact-link">✉ &nbsp;yussif4112@gmail.com</a>
+        <a href="https://www.linkedin.com/in/mohammed-yussif-0b8262268/" target="_blank" class="contact-link">💼 &nbsp;linkedin.com/in/mohammed-yussif</a>
+        <a href="https://github.com/yussif4112mohammed" target="_blank" class="contact-link">🐙 &nbsp;github.com/yussif4112mohammed</a>
+      </div>
+
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <!-- ✅ FIX F-08: maxlength prevents oversized input from reaching backend -->
+          <input type="text"  id="name"    name="name"    placeholder="John Doe"             required maxlength="100" autocomplete="name" />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email"   name="email"   placeholder="john@example.com"     required maxlength="254" autocomplete="email" />
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <!-- ✅ FIX F-08: maxlength on textarea matches backend 2000 char limit -->
+          <textarea           id="message" name="message" placeholder="Tell me about your security needs..." required maxlength="2000" rows="5"></textarea>
+          <!-- Character counter injected here by script.js -->
+        </div>
+        <button type="submit" class="btn btn-primary">./send_message</button>
+        <!-- ✅ FIX F-05: This element uses textContent in JS — never innerHTML -->
+        <p id="formStatus" class="form-status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div><span class="accent">mohammed@yussif</span>:~$ echo "© 2026 Mohammed Yussif — All rights reserved"</div>
+    <div>Built with <span class="accent">☕ + ⚡</span></div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
