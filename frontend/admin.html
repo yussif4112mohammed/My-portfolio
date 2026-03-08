@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard — Mohammed Yussif</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:      #0a0d12;
+      --surface: #111620;
+      --card:    #161c28;
+      --border:  #1e2a3a;
+      --accent:  #00ff88;
+      --accent2: #00b4d8;
+      --red:     #ff3c5f;
+      --text:    #c8d6e5;
+      --muted:   #5a7288;
+      --mono:    'Share Tech Mono', monospace;
+      --sans:    'Inter', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      min-height: 100vh;
+    }
+
+    /* ── Login Screen ── */
+    #login-screen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .login-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .login-box h1 {
+      font-family: var(--mono);
+      color: var(--accent);
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .login-box p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+      font-family: var(--mono);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus {
+      border-color: var(--accent);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 0.85rem;
+      background: var(--accent);
+      color: #0a0d12;
+      border: none;
+      border-radius: 6px;
+      font-family: var(--mono);
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .btn:hover { opacity: 0.85; }
+
+    .error-msg {
+      color: var(--red);
+      font-size: 0.85rem;
+      margin-top: 1rem;
+      font-family: var(--mono);
+      display: none;
+    }
+
+    /* ── Dashboard ── */
+    #dashboard {
+      display: none;
+      min-height: 100vh;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header-left h1 {
+      font-family: var(--mono);
+      color: var(--accent);
+      font-size: 1rem;
+    }
+
+    .header-left p {
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-family: var(--mono);
+    }
+
+    .logout-btn {
+      padding: 0.4rem 1rem;
+      background: transparent;
+      border: 1px solid var(--red);
+      color: var(--red);
+      border-radius: 4px;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .logout-btn:hover {
+      background: var(--red);
+      color: white;
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ── Stats Row ── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.2rem 1.5rem;
+    }
+
+    .stat-card .stat-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-family: var(--mono);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .stat-card .stat-num {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      font-family: var(--mono);
+      line-height: 1.2;
+      margin-top: 0.3rem;
+    }
+
+    /* ── Messages Section ── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .section-header h2 {
+      font-family: var(--mono);
+      color: var(--accent2);
+      font-size: 1rem;
+    }
+
+    .refresh-btn {
+      padding: 0.4rem 1rem;
+      background: transparent;
+      border: 1px solid var(--accent2);
+      color: var(--accent2);
+      border-radius: 4px;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .refresh-btn:hover {
+      background: var(--accent2);
+      color: #0a0d12;
+    }
+
+    /* ── Message Cards ── */
+    #messages-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .message-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+      position: relative;
+    }
+
+    .message-card:hover {
+      border-color: var(--accent2);
+    }
+
+    .message-card.unread {
+      border-left: 3px solid var(--accent);
+    }
+
+    .message-card.read {
+      opacity: 0.7;
+    }
+
+    .message-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.8rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .sender-info .sender-name {
+      font-weight: 600;
+      color: var(--accent);
+      font-size: 1rem;
+    }
+
+    .sender-info .sender-email {
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-family: var(--mono);
+    }
+
+    .message-date {
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-family: var(--mono);
+    }
+
+    .message-body {
+      color: var(--text);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      padding: 1rem;
+      background: var(--surface);
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      margin-bottom: 1rem;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .message-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      padding: 0.35rem 0.8rem;
+      border-radius: 4px;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      cursor: pointer;
+      border: 1px solid;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-read {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: transparent;
+    }
+
+    .btn-read:hover {
+      background: var(--accent);
+      color: #0a0d12;
+    }
+
+    .btn-reply {
+      border-color: var(--accent2);
+      color: var(--accent2);
+      background: transparent;
+    }
+
+    .btn-reply:hover {
+      background: var(--accent2);
+      color: #0a0d12;
+    }
+
+    .badge-unread {
+      display: inline-block;
+      padding: 0.1rem 0.5rem;
+      background: var(--accent);
+      color: #0a0d12;
+      border-radius: 20px;
+      font-size: 0.65rem;
+      font-family: var(--mono);
+      font-weight: bold;
+      margin-left: 0.5rem;
+    }
+
+    .badge-read {
+      display: inline-block;
+      padding: 0.1rem 0.5rem;
+      background: var(--muted);
+      color: var(--bg);
+      border-radius: 20px;
+      font-size: 0.65rem;
+      font-family: var(--mono);
+      margin-left: 0.5rem;
+    }
+
+    /* ── Empty / Loading States ── */
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--muted);
+      font-family: var(--mono);
+    }
+
+    .empty-state .icon { font-size: 3rem; margin-bottom: 1rem; }
+
+    .loading {
+      text-align: center;
+      padding: 3rem;
+      color: var(--muted);
+      font-family: var(--mono);
+    }
+
+    .loading::after {
+      content: '';
+      display: inline-block;
+      animation: dots 1.5s infinite;
+    }
+
+    @keyframes dots {
+      0%   { content: '.'; }
+      33%  { content: '..'; }
+      66%  { content: '...'; }
+    }
+
+    /* ── Notification Toast ── */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--card);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s;
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      main { padding: 1rem; }
+      header { padding: 1rem; }
+      .message-meta { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── LOGIN SCREEN ── -->
+  <div id="login-screen">
+    <div class="login-box">
+      <h1>[ admin@portfolio ~$ ]</h1>
+      <p>Enter your admin token to access the dashboard</p>
+      <div class="form-group">
+        <label>Admin Token</label>
+        <input type="password" id="token-input" placeholder="Enter your secret token..." />
+      </div>
+      <button class="btn" onclick="login()">./login</button>
+      <p class="error-msg" id="login-error">⚠ Invalid token. Access denied.</p>
+    </div>
+  </div>
+
+  <!-- ── DASHBOARD ── -->
+  <div id="dashboard">
+    <header>
+      <div class="header-left">
+        <h1>[ admin@mohammed-yussif ~$ ]</h1>
+        <p>Portfolio Admin Dashboard</p>
+      </div>
+      <button class="logout-btn" onclick="logout()">./logout</button>
+    </header>
+
+    <main>
+      <!-- Stats -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-label">Total Messages</div>
+          <div class="stat-num" id="stat-total">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Unread</div>
+          <div class="stat-num" id="stat-unread" style="color: var(--accent)">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Read</div>
+          <div class="stat-num" id="stat-read" style="color: var(--muted)">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Last Message</div>
+          <div class="stat-num" id="stat-last" style="font-size: 0.9rem; margin-top: 0.5rem">—</div>
+        </div>
+      </div>
+
+      <!-- Messages -->
+      <div class="section-header">
+        <h2>// incoming_messages</h2>
+        <button class="refresh-btn" onclick="loadMessages()">↻ Refresh</button>
+      </div>
+
+      <div id="messages-container">
+        <div class="loading">Loading messages</div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ── Smart API base URL ─────────────────────────────────────────────────
+    const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+      ? 'http://localhost:3000'
+      : '';
+
+    let adminToken = '';
+
+    // ── Login ──────────────────────────────────────────────────────────────
+    async function login() {
+      const input = document.getElementById('token-input');
+      const token = input.value.trim();
+      if (!token) return;
+
+      try {
+        const res = await fetch(`${API_BASE}/api/messages`, {
+          headers: { 'x-admin-token': token }
+        });
+
+        if (res.ok) {
+          adminToken = token;
+          document.getElementById('login-screen').style.display = 'none';
+          document.getElementById('dashboard').style.display = 'block';
+          loadMessages();
+        } else {
+          document.getElementById('login-error').style.display = 'block';
+          input.style.borderColor = 'var(--red)';
+        }
+      } catch (err) {
+        document.getElementById('login-error').textContent = '⚠ Could not connect to server.';
+        document.getElementById('login-error').style.display = 'block';
+      }
+    }
+
+    // Allow Enter key on token input
+    document.getElementById('token-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') login();
+    });
+
+    // ── Logout ─────────────────────────────────────────────────────────────
+    function logout() {
+      adminToken = '';
+      document.getElementById('dashboard').style.display = 'none';
+      document.getElementById('login-screen').style.display = 'flex';
+      document.getElementById('token-input').value = '';
+    }
+
+    // ── Load Messages ──────────────────────────────────────────────────────
+    async function loadMessages() {
+      const container = document.getElementById('messages-container');
+      container.innerHTML = '<div class="loading">Loading messages</div>';
+
+      try {
+        const res = await fetch(`${API_BASE}/api/messages`, {
+          headers: { 'x-admin-token': adminToken }
+        });
+
+        if (!res.ok) {
+          container.innerHTML = '<div class="empty-state"><div class="icon">🔒</div>Authentication failed.</div>';
+          return;
+        }
+
+        const data = await res.json();
+        const messages = data.messages || [];
+
+        // Update stats
+        const unread = messages.filter(m => !m.is_read).length;
+        const read   = messages.filter(m => m.is_read).length;
+
+        document.getElementById('stat-total').textContent  = messages.length;
+        document.getElementById('stat-unread').textContent = unread;
+        document.getElementById('stat-read').textContent   = read;
+
+        if (messages.length > 0) {
+          const latest = new Date(messages[0].created_at);
+          document.getElementById('stat-last').textContent =
+            latest.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+        }
+
+        // Render messages
+        if (messages.length === 0) {
+          container.innerHTML = `
+            <div class="empty-state">
+              <div class="icon">📭</div>
+              <p>No messages yet.</p>
+              <p style="font-size:0.8rem; margin-top:0.5rem">Messages from your contact form will appear here.</p>
+            </div>`;
+          return;
+        }
+
+        container.innerHTML = '';
+        messages.forEach(msg => {
+          const card = document.createElement('div');
+          card.className = `message-card ${msg.is_read ? 'read' : 'unread'}`;
+          card.id = `msg-${msg.id}`;
+
+          const date = new Date(msg.created_at).toLocaleString('en-GB', {
+            day: 'numeric', month: 'short', year: 'numeric',
+            hour: '2-digit', minute: '2-digit'
+          });
+
+          // Use textContent for all user data — prevents XSS
+          card.innerHTML = `
+            <div class="message-meta">
+              <div class="sender-info">
+                <div class="sender-name"></div>
+                <div class="sender-email"></div>
+              </div>
+              <div style="display:flex; align-items:center; gap:0.5rem">
+                <span class="message-date">${date}</span>
+                ${msg.is_read
+                  ? '<span class="badge-read">read</span>'
+                  : '<span class="badge-unread">new</span>'}
+              </div>
+            </div>
+            <div class="message-body"></div>
+            <div class="message-actions">
+              ${!msg.is_read ? `<button class="action-btn btn-read" onclick="markRead(${msg.id})">✓ Mark as read</button>` : ''}
+              <a class="action-btn btn-reply" href="mailto:${encodeURIComponent(msg.email)}?subject=Re: Your message&body=Hi ${encodeURIComponent(msg.name)},%0A%0A">✉ Reply</a>
+            </div>
+          `;
+
+          // Set text content safely to prevent XSS
+          card.querySelector('.sender-name').textContent = msg.name;
+          card.querySelector('.sender-email').textContent = msg.email;
+          card.querySelector('.message-body').textContent = msg.message;
+
+          container.appendChild(card);
+        });
+
+      } catch (err) {
+        container.innerHTML = '<div class="empty-state"><div class="icon">⚠️</div><p>Could not load messages. Is the server running?</p></div>';
+      }
+    }
+
+    // ── Mark as Read ───────────────────────────────────────────────────────
+    async function markRead(id) {
+      try {
+        const res = await fetch(`${API_BASE}/api/messages/${id}/read`, {
+          method: 'PATCH',
+          headers: { 'x-admin-token': adminToken }
+        });
+
+        if (res.ok) {
+          showToast('✓ Message marked as read');
+          loadMessages();
+        }
+      } catch (err) {
+        showToast('⚠ Could not update message');
+      }
+    }
+
+    // ── Toast notification ─────────────────────────────────────────────────
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+  </script>
+</body>
+</html>
