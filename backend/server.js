@@ -37,7 +37,7 @@ app.use(helmet({
 const allowedOrigins = [
   'http://localhost:3000',
   'http://127.0.0.1:5500',
-  'https://yourdomain.com',   // ⬅ CHANGE THIS to your real domain
+  'https://my-portfolio-xybn.onrender.com',   // ⬅ CHANGE THIS to your real domain
 ];
 
 app.use(cors({
