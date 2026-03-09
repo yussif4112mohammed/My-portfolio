@@ -21,16 +21,7 @@ const PORT = process.env.PORT || 3000;
 // ── ✅ FIX F-04: Helmet — sets ALL critical HTTP security headers ─────────────
 // Adds: X-Frame-Options, X-Content-Type-Options, Referrer-Policy & more
 app.use(helmet({
-  contentSecurityPolicy: {
-    directives: {
-      defaultSrc: ["'self'"],
-      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-      fontSrc:    ["'self'", "https://fonts.gstatic.com"],
-      scriptSrc: ["'self'", "'unsafe-inline'"],
-      imgSrc:     ["'self'", "data:"],
-      connectSrc: ["'self'"],
-    }
-  }
+  contentSecurityPolicy: false,
 }));
 
 // ── ✅ FIX F-02: CORS — only YOUR domain can call this API ────────────────────
