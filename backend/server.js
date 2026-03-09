@@ -8,12 +8,12 @@
    ============================================================ */
 
 const express    = require('express');
+const path = require('path');
 const cors       = require('cors');
 const helmet     = require('helmet');              // ✅ FIX F-04
 const rateLimit  = require('express-rate-limit'); // ✅ FIX F-07
 const bodyParser = require('body-parser');
 const sqlite3    = require('sqlite3').verbose();
-const path       = require('path');
 
 const app  = express();
 const PORT = process.env.PORT || 3000;
@@ -24,7 +24,7 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      styleSrc:   ["'self'", "https://fonts.googleapis.com"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
       fontSrc:    ["'self'", "https://fonts.gstatic.com"],
       scriptSrc:  ["'self'"],
       imgSrc:     ["'self'", "data:"],
